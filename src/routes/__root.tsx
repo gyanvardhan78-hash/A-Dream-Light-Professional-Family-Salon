@@ -1,4 +1,3 @@
-@'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -133,4 +132,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-'@ | Set-Content -Path ".\src\routes\__root.tsx" -Encoding UTF8
