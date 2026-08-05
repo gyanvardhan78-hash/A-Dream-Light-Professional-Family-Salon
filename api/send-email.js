@@ -4,8 +4,11 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { name, phone, service, date, time, advance, balance, paymentId } = req.body;
 
+    // UPDATED: Explicit SMTP Configuration for Vercel
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true, // Use SSL
       auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_PASS
@@ -14,7 +17,7 @@ export default async function handler(req, res) {
 
     const mailOptions = {
       from: process.env.GMAIL_USER,
-      to: process.env.GMAIL_USER, // फिलहाल ओनर और भेजने वाला दोनों एक ही ईमेल रहेगा ताकि बाउंस न हो
+      to: process.env.GMAIL_USER, 
       subject: `🎉 New Booking: ${service} by ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px;">
@@ -41,7 +44,8 @@ export default async function handler(req, res) {
       await transporter.sendMail(mailOptions);
       res.status(200).json({ success: true, message: 'Email notification sent successfully!' });
     } catch (error) {
-      console.error("Email Error:", error);
+      // Vercel logs me exact error dekhne ke liye stringify ka use kiya hai
+      console.error("Email Error Details:", JSON.stringify(error));
       res.status(500).json({ error: 'Failed to send email notification' });
     }
   } else {
