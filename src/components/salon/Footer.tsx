@@ -11,6 +11,10 @@ import {
 import { GoldButton } from "./GoldButton";
 import { fadeUp, stagger, viewport } from "./motion";
 
+const MAPS_URL = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("A Dream Light Professional Family Salon, Opp. Green Heights, Nitai Path, Dhirajganj, Jamalpur, Jamshedpur, Jharkhand 832108");
+const FACEBOOK_URL: string = "";
+const INSTAGRAM_URL = "https://www.instagram.com/a_dream_light/";
+
 export function Footer({ onBook }: { onBook: () => void }) {
   return (
     <footer className="border-t border-gold/15 bg-surface/40 px-5 pt-20 pb-10">
@@ -49,11 +53,17 @@ export function Footer({ onBook }: { onBook: () => void }) {
               bridal and spa care for the families of Jamshedpur.
             </p>
             <div className="mt-5 flex gap-3">
-              {[Instagram, Facebook].map((Icon, i) => (
+              {[
+                { Icon: Instagram, href: INSTAGRAM_URL, label: "Instagram" },
+                // Add the salon's Facebook page URL here to show the Facebook icon.
+                ...(FACEBOOK_URL ? [{ Icon: Facebook, href: FACEBOOK_URL, label: "Facebook" }] : []),
+              ].map(({ Icon, href, label }) => (
                 <a
-                  key={i}
-                  href="#"
-                  aria-label="Social link"
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
                   className="grid h-9 w-9 place-items-center rounded-full border border-gold/25 text-gold transition-colors hover:bg-gold/10"
                 >
                   <Icon size={15} />
@@ -69,8 +79,9 @@ export function Footer({ onBook }: { onBook: () => void }) {
             <address className="mt-5 space-y-3 text-sm not-italic text-muted-foreground">
               <p className="flex gap-3">
                 <MapPin size={16} className="mt-0.5 shrink-0 text-gold" />
-                A Dream Light Professional Family Salon, Dhirajganj,
-                Jamshedpur, Jharkhand 831002
+                A Dream Light Professional Family Salon, Opp. Green Heights,
+                Nitai Path, Dhirajganj, Jamalpur,
+                Jamshedpur, Jharkhand 832108
               </p>
               <p className="flex gap-3">
                 <Phone size={16} className="shrink-0 text-gold" />
@@ -122,21 +133,24 @@ export function Footer({ onBook }: { onBook: () => void }) {
             <h3 className="text-sm uppercase tracking-[0.25em] text-gold">
               Find Us
             </h3>
-            <div className="relative mt-5 grid h-44 place-items-center overflow-hidden rounded-2xl border border-gold/20 bg-surface-2">
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open A Dream Light salon location in Google Maps"
+              className="relative mt-5 grid h-44 place-items-center overflow-hidden rounded-2xl border border-gold/20 bg-surface-2 transition-colors hover:border-gold/50"
+            >
               <div className="absolute inset-0 bg-[linear-gradient(color-mix(in_oklab,var(--gold)_10%,transparent)_1px,transparent_1px),linear-gradient(90deg,color-mix(in_oklab,var(--gold)_10%,transparent)_1px,transparent_1px)] bg-[size:26px_26px]" />
               <div className="relative text-center">
                 <MapPin className="mx-auto text-gold" size={24} />
                 <p className="mt-2 text-xs text-muted-foreground">
                   Google Maps · Dhirajganj
                 </p>
-                <a
-                  href="#"
-                  className="mt-2 inline-block text-xs text-gold underline underline-offset-4"
-                >
+                <span className="mt-2 inline-block text-xs text-gold underline underline-offset-4">
                   Get Directions
-                </a>
+                </span>
               </div>
-            </div>
+            </a>
           </motion.div>
         </div>
 
@@ -151,7 +165,10 @@ export function Footer({ onBook }: { onBook: () => void }) {
           variants={fadeUp}
           className="mt-4 text-center text-[11px] text-muted-foreground/70"
         >
-          <p>Created by Gyan Vardhan</p>
+          <p>
+            Demo website for A Dream Light Professional Family Salon, not the official site.
+            Powered by <span className="text-gold">Gyan Vardhan</span> · Vedaverse Studio
+          </p>
         </motion.div>
       </motion.div>
     </footer>

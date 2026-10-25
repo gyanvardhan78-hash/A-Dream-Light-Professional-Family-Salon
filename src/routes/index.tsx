@@ -37,10 +37,10 @@ export const Route = createFileRoute("/")({
           name: "A Dream Light Professional Family Salon",
           address: {
             "@type": "PostalAddress",
-            streetAddress: "Dhirajganj",
+            streetAddress: "Opp. Green Heights, Nitai Path, Dhirajganj, Jamalpur",
             addressLocality: "Jamshedpur",
             addressRegion: "Jharkhand",
-            postalCode: "831002",
+            postalCode: "832108",
             addressCountry: "IN",
           },
           telephone: "+91 8409630086",

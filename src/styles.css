@@ -82,6 +82,9 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
+    background-color: oklch(0.13 0.006 60);
+    color-scheme: dark;
+    overscroll-behavior-y: none;
   }
 
   * {
@@ -90,7 +93,8 @@
 
   body {
     background: var(--gradient-dark);
-    background-attachment: fixed;
+    background-color: oklch(0.13 0.006 60);
+    min-height: 100dvh;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;

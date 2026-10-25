@@ -135,7 +135,7 @@ export function BookingModal({
 
       // 2. Open Razorpay Checkout
       const options = {
-        key: "rzp_test_TLz7s55uO4oGCr", 
+        key: orderData.key || "rzp_test_TLz7s55uO4oGCr", 
         amount: orderData.amount,
         currency: orderData.currency,
         name: "A Dream Light Salon",
